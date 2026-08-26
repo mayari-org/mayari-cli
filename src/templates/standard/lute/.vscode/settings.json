@@ -1,0 +1,7 @@
+{
+    "luau-lsp.plugins.enabled": true,
+    "luau-lsp.plugins.paths": [
+        "./.vscode/plugins/package-resolver.luau"
+    ],
+    "luau-lsp.plugins.fileSystem.enabled": true
+}

@@ -1,0 +1,21 @@
+[package]
+name = "name/your_project"
+version = "0.1.0"
+license = "MIT"
+private = true
+
+[target]
+environment = "luau"
+
+[tools]
+lute = "luau-lang/lute@1.0.0"
+stylua = "JohnnyMorganz/StyLua@2.5.2"
+selene = "Kampfkarren/selene@0.31.0"
+
+[scripts]
+start = "mayari"
+dev = "mayari --dev"
+
+[dependencies]
+mayari = { name = "mayari/core", version = "^" }
+common = { name = "mayari/common", version = "^" }

@@ -1,0 +1,8 @@
+{
+    "languageMode": "strict",
+    "aliases": {
+        "utils": "./src/utils",
+        "cmds": "./src/cmds",
+        "mayari.adpt": "./packages/luau/adpt"
+    }
+}

@@ -1,0 +1,24 @@
+[package]
+name = "mayari/cli"
+version = "0.1.0"
+description = "A cli tool for mayari."
+authors = ["mayari-org"]
+license = "MIT"
+
+[target]
+environment = "luau"
+main = "src/init.luau"
+includes = ["src", "LICENSE", "README.md", "lpm.toml", "lpm.lock"]
+
+[scripts]
+mayari = "zune run src/index"
+build = "zune run script/build"
+dev = "zune run script/dev"
+
+[tools]
+zune = "Scythe-Technology/zune@0.5.8"
+stylua = "JohnnyMorganz/StyLua@2.5.2"
+selene = "Kampfkarren/selene@0.31.0"
+
+[dependencies]
+adpt = { name = "mayari/adpt", version = "^" }

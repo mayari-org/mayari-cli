@@ -1,0 +1,13 @@
+{
+    "luau-lsp.plugins.enabled": true,
+    "luau-lsp.plugins.paths": [
+        "./.vscode/plugins/package-resolver.luau"
+    ],
+    "luau-lsp.plugins.fileSystem.enabled": true,
+    "luau-lsp.types.definitionFiles": {
+        "zune": "/home/wiz/.zune/typedefs/global/zune.d.luau"
+    },
+    "luau-lsp.types.documentationFiles": [
+        "/home/wiz/.zune/typedefs/global/zune.d.json"
+    ]
+}
