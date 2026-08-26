@@ -33,7 +33,7 @@ jobs:
         
 
       - name: Build
-        run: lpm build
+        run: lpm i && lpm build
 
       - name: Zip binary (Unix)
         if: runner.os != 'Windows'
