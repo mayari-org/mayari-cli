@@ -14,16 +14,6 @@ if success then
     fs.deleteFile(`./{FILE_NAME}`)
 end
 
--- local function getVersion()
--- 	local result = process.run("git", {"describe", "--tags", "--abbrev=0", "--always"})
--- 	if result.ok then
--- 		return ((result.stdout or ""):gsub("%s+$", ""))
--- 	end
--- 	return "unknown"
--- end
-
--- fs.writeFile("src/cmds/version/ver.luau", `-- AUTO-GENERATED, do not edit\nreturn "{getVersion()}"\n`)
-
 local binaryName = ""
 
 if platform.os == "windows" then
@@ -40,6 +30,7 @@ local result = process.run("zune", {
     "packages/**/*.luau",
     "-f",
     ".luaurc",
+    "lpm.toml",
     "src/templates/**/*",
     `--out=dist/{binaryName}`,
     "--release",

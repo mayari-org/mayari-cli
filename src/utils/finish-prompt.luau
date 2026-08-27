@@ -20,12 +20,29 @@ local function buildLine(
 	return out
 end
 
--- Async
+--[[
+    Clears the current line and replace with `promptText` and on the side `answerText` as success.
+
+    @param promptText The text to replace the current text with.
+    @param answerText Similar to promptText, placed on the side of the `promptText`.
+    @param extraLines Number of additional line to be cleared.
+
+    @return `void`
+]]
 function FinishPrompt.success(promptText: string, answerText: string, extraLines: number)
 	io.stdout:write(buildLine("✔", "green", promptText, answerText, extraLines) .. "\r\n")
 end
 
 -- Sync — used from a signal handler (process.onSignal).
+--[[
+    Synchronous <br>
+    Clears the current line and replace with `promptText` as fail.
+
+    @param promptText The text to replace the current text with.
+    @param extraLines Number of additional line to be cleared.
+
+    @return `void`
+]]
 function FinishPrompt.cancelSync(promptText: string, extraLines: number)
 	io.stdout:writeSync(buildLine("✖", "red", promptText, nil, extraLines) .. "\r\n")
 end

@@ -1,6 +1,6 @@
 [package]
 name = "mayari/cli"
-version = "0.0.1"
+version = "0.0.2"
 description = "A cli tool for mayari."
 authors = ["mayari-org"]
 license = "MIT"

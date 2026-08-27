@@ -1,16 +1,8 @@
-[package]
-name = "name/your_project"
-version = "0.1.0"
-license = "MIT"
-private = true
-
-[target]
-environment = "luau"
-
 [tools]
 zune = "Scythe-Technology/zune@0.5.8"
 stylua = "JohnnyMorganz/StyLua@2.5.2"
 selene = "Kampfkarren/selene@0.31.0"
+mayari = "mayari-org/mayari-cli@0.0.2"
 
 [scripts]
 start = "mayari"

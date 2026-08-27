@@ -1,9 +1,10 @@
-local Nova = require('@nova')
+local common = require('common')
+local response = common.response
 
 local Home = {}
 
 function Home.Get()
-    return Nova.response.json({ msg = 'Hello, Nova' })
+    return response.json({ msg = 'Hello, Nova' })
 end
 
 return Home

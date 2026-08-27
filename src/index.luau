@@ -1,5 +1,6 @@
 local process = zune.process
 local style = require("@utils/style")
+local version = require("@cmds/version")
 
 local cmds: {
     [string]: {
@@ -26,7 +27,7 @@ local function main()
 
 		if index == 2 then
 			if token == "--version" or token == "-v" then
-				--cmds.version.exec()
+				version.exec()
 				return
             end
             

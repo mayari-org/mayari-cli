@@ -1,10 +1,11 @@
-local Nova = require('@nova')
+local common = require('common')
+local response = common.response
 
 local Home = {}
 
-function Home.Get(req: Nova.RequestWith<{ ids: { string } }>)
+function Home.Get(req: common.RequestWith<{ ids: { string } }>)
     local userIds = req.params.ids
-    return Nova.response.json({ userIds = userIds, msg = 'Found user IDs' })
+    return response.json({ userIds = userIds, msg = 'Found user IDs' })
 end
 
 return Home
