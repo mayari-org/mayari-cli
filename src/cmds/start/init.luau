@@ -8,17 +8,10 @@ local toml = zune.serde.toml
 
 local entryDirPath = "./src"
 local outDir = "./dist"
-local tomlContent = fs.readFileSync(`{process.cwd()}/mayari.toml`)
-local mayari = toml.decode(tomlContent)
 
 local function exec()
-    -- if mayari.runtime ~= "lute" 
-    -- or mayari.runtime ~= "lune"
-    -- or mayari.runtime ~= "zune" then
-    --     print(mayari.runtime)
-    --     style.err('The listed runtime on your "mayari.toml" is not supported')
-    --     return
-    -- end
+    local tomlContent = fs.readFileSync(`{process.cwd()}/mayari.toml`)
+    local mayari = toml.decode(tomlContent)
 
     if not (fs.stat(`{entryDirPath}/main.luau`).kind == "file") then
         style.warn(`Entry file named as "main.luau" is not found at {process.cwd()}/src`)
