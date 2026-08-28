@@ -1,4 +1,4 @@
-local common = require('common')
+local common = require("common")
 local response = common.response
 
 local Home = {}

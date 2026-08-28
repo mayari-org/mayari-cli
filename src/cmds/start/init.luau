@@ -18,10 +18,8 @@ local function exec()
         return
     end
 
-    style.print("Resolving Luau Files!", "yellow")
     for _, filePath in collectLuauFiles(entryDirPath) do
-        local resolved = resolveFile(filePath, outDir)
-        print(filePath .. " -> " .. style.normal(resolved, "green"))
+        resolveFile(filePath, outDir)
     end
 
     local result = process.run(mayari.runtime, { "run", `{outDir}/src/main` }, {

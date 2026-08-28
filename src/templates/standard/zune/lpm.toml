@@ -5,8 +5,8 @@ selene = "Kampfkarren/selene@0.31.0"
 mayari = "mayari-org/mayari-cli@0.0.2"
 
 [scripts]
-start = "mayari"
-dev = "mayari --dev"
+start = "mayari start"
+dev = "mayari dev"
 
 [dependencies]
 mayari = { name = "mayari/core", version = "^" }

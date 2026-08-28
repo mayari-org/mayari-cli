@@ -1,4 +1,4 @@
-local Mayari = require('mayari')
+local Mayari = require("mayari")
 local process = zune.process
 
 local PORT = process.env.PORT or 8080

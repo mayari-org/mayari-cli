@@ -1,15 +1,18 @@
 local CreateEnum = {}
 
+export type Projects = keyof<typeof(CreateEnum.Projects)>
+export type Runtimes = keyof<typeof(CreateEnum.Runtimes)>
+
 CreateEnum.Projects = {
-    STANDARD = "standard",
-    BARE = "bare",
+    STANDARD = "STANDARD",
+    BARE = "BARE",
 }
 
 CreateEnum.Runtimes = {
-    LUNE = "lune",
-    ZUNE = "zune", 
-    LUTE = "lute",
-    LUAU = "luau",
+    LUNE = "LUNE",
+    ZUNE = "ZUNE", 
+    LUTE = "LUTE",
+    LUAU = "LUAU",
 }
 
 return CreateEnum

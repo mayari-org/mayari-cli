@@ -1,7 +1,22 @@
 local createEnum = require("./create.enum")
 local style = require("@utils/style")
+local finishPrompt = require("@utils/finish-prompt")
 
 local fs = zune.fs
+local process = zune.process
+
+local SETUP_COMMANDS: { [string]: { { string | { string } } } } = {
+    [createEnum.Runtimes.LUTE] = {
+        { "lute", { "setup", "--with-luaurc" } },
+    },
+    [createEnum.Runtimes.LUNE] = {
+        { "lune", { "setup" } },
+    },
+    [createEnum.Runtimes.LUAU] = {
+        { "lute", { "setup", "--with-luaurc" } },
+        { "lune", { "setup" } },
+    },
+}
 
 local function generateProject(filePaths: { string }, projectPath: string, subNum: number)
     local dirname: { string } = {}
@@ -24,9 +39,47 @@ local function generateProject(filePaths: { string }, projectPath: string, subNu
         local fileBufferContent = fs.embedFile(`../../{filePath}`)
         fs.writeFile(`{projectPath}{filePath:sub(subNum)}`, fileBufferContent)
     end
+
+    local extraLines = 0
+    if subNum == 24 then
+        extraLines = 1
+    end
+
+    finishPrompt.success("Generated a new Mayari project!\n", nil, extraLines)
+
+    local processResult = process.run("lpm", { "i" }, { 
+        stdin = "inherit",
+        stdout = "inherit",
+        stderr = "inherit"
+    })
+
+    if not processResult.ok then
+        print(processResult.stderr)
+        process.exit(processResult.code)
+    end
 end
 
-local function createStandard(projectPath: string, runtime: string)
+local function runSetup(program: string, args: { string })
+    local processResult = process.run(program, args, { stderr = "inherit" })
+
+    if not processResult.ok then
+        print(processResult.stderr)
+        process.exit(processResult.code)
+    end
+end
+
+local function generateTypeDefRc(runtime: createEnum.Runtimes)
+    local commands = SETUP_COMMANDS[runtime:upper()]
+    if not commands then
+        return
+    end
+
+    for _, command in commands do
+        runSetup(command[1] :: string, command[2] :: { string })
+    end
+end
+
+local function createStandard(projectPath: string, runtime: createEnum.Runtimes)
     local standardFiles: { string } = {}
     local standardTemplate = `src/templates/standard/{runtime}`
     local standardMainTemplate = `src/templates/standard/main`
@@ -44,9 +97,16 @@ local function createStandard(projectPath: string, runtime: string)
     end
 
     generateProject(standardFiles, projectPath, 24)
+
+    generateTypeDefRc(runtime)
+
+    style.printB("\nRun:", "green")
+    style.print("lpm start\n")
+    style.printB("Or for development mode:", "green")
+    style.print("lpm run dev\n")
 end
 
-local function createBare(projectPath: string)
+local function createBare(projectPath: string, runtime: createEnum.Runtimes)
     local bareFiles: { string } = {}
     local bareTemplate = "src/templates/bare"
 
@@ -62,13 +122,18 @@ local function createBare(projectPath: string)
     end
 
     generateProject(bareFiles, projectPath, 16)
+
+    generateTypeDefRc(runtime)
+
+    style.printB("\nRun:", "green")
+    style.print("lpm start\n")
 end
 
-local function createProject(projectPath: string, projectType: string, runtime: string)
+local function createProject(projectPath: string, projectType: createEnum.Projects, runtime: createEnum.Runtimes)
     if projectType == createEnum.Projects.STANDARD then
         createStandard(projectPath, runtime)
     else
-        createBare(projectPath)
+        createBare(projectPath, runtime)
     end
 end
 

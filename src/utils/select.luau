@@ -135,7 +135,7 @@ local function select<T>(promptText: string, choices: { Choice<T> }): T
 			elseif key == "enter" then
 				return choices[cursor].value, choices[cursor].label
 			elseif key == "ctrl-c" or key == "eof" then
-				handleCancel() -- fallback, in case byte 3 does get through
+				handleCancel()
 			end
 		end
 	end)
@@ -143,7 +143,7 @@ local function select<T>(promptText: string, choices: { Choice<T> }): T
 	cleanup()
 
 	if not ok then
-		error(resultValue, 0)
+		error(resultValue)
 	end
 
 	FinishPrompt.success(promptText, resultLabel, #choices)

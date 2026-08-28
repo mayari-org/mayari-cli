@@ -38,21 +38,21 @@ local function exec(args: { string })
     local projectType = select.select("Which project type will you use?", {
         { label = "Standard", value = PROJECTS.STANDARD, hint = "Full-featured scaffold for backend logic and static serving." },
         { label = "Bare", value = PROJECTS.BARE, hint = "Minimal scaffold with core configs and common libraries." },
-    })
+    }) :: createEnum.Projects
 
     if projectType == PROJECTS.BARE then
         configTemplate = {
-            runtime = RUNTIMES.LUAU
+            runtime = RUNTIMES.LUAU:lower()
         }
     else
         local runtime = select.select("Which runtime do you prefer?", {
             { label = "Lute", value = RUNTIMES.LUTE, hint = "The official Luau runtime" },
             { label = "Lune", value = RUNTIMES.LUNE, hint = "Built by the community" },
             { label = "Zune", value = RUNTIMES.ZUNE, hint = "Built by the community" },
-        }) 
+        }) :: createEnum.Projects
         
         configTemplate = {
-            runtime = runtime
+            runtime = runtime:lower()
         }
     end
 

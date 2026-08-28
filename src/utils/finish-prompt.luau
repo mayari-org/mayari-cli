@@ -29,7 +29,7 @@ end
 
     @return `void`
 ]]
-function FinishPrompt.success(promptText: string, answerText: string, extraLines: number)
+function FinishPrompt.success(promptText: string, answerText: string?, extraLines: number)
 	io.stdout:write(buildLine("✔", "green", promptText, answerText, extraLines) .. "\r\n")
 end
 
