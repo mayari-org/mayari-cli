@@ -1,6 +1,8 @@
 local createEnum = require("./create.enum")
 local style = require("@utils/style")
 local finishPrompt = require("@utils/finish-prompt")
+local prompt = require("@utils/prompt")
+local tomlPatch = require("@utils/tomlpatch")
 
 local fs = zune.fs
 local process = zune.process
@@ -19,7 +21,26 @@ local SETUP_COMMANDS: { [string]: { { string | { string } } } } = {
 }
 
 local function generateProject(filePaths: { string }, projectPath: string, subNum: number)
+    local projectName = ""
     local dirname: { string } = {}
+    local extraLines = 0
+
+    if subNum == 24 then
+        extraLines = 1
+    elseif subNum == 16 then
+        local ispatternRight = false
+        repeat
+            extraLines += 2
+            projectName = prompt("Enter project name: ", style.normal('[Scoped as "scope/name"; letters and numbers only]', "gray"))
+
+            if not projectName:match("^[a-z0-9_-]+/[a-z0-9_-]+$") then
+                extraLines += 2
+                style.print(`"{projectName}" does not match the pattern "scope/name"\n`, "red")
+            else
+                ispatternRight = true
+            end
+        until ispatternRight
+    end
 
     for _, filePath in filePaths do
         local fileDir = fs.path.dirname(filePath)
@@ -37,12 +58,13 @@ local function generateProject(filePaths: { string }, projectPath: string, subNu
 
     for _, filePath in filePaths do
         local fileBufferContent = fs.embedFile(`../../{filePath}`)
+        
+        if subNum == 16 and filePath == "templates/bare/lpm.toml" then
+            local source = buffer.tostring(fileBufferContent)
+            local updatedSource = tomlPatch.set(source, { "package", "name" }, projectName)
+            fileBufferContent = buffer.fromstring(updatedSource)
+        end
         fs.writeFile(`{projectPath}{filePath:sub(subNum)}`, fileBufferContent)
-    end
-
-    local extraLines = 0
-    if subNum == 24 then
-        extraLines = 1
     end
 
     finishPrompt.success("Generated a new Mayari project!\n", nil, extraLines)

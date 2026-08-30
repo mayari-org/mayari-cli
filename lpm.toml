@@ -13,6 +13,7 @@ includes = ["src", "LICENSE", "README.md", "lpm.toml", "lpm.lock"]
 [scripts]
 build = "zune run script/build"
 dev = "zune run script/dev"
+update = "zune run script/update"
 
 [tools]
 zune = "Scythe-Technology/zune@0.5.8"

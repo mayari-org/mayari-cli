@@ -1,17 +1,13 @@
 local process = zune.process
 local style = require("@utils/style")
-local version = require("@cmds/version")
 
 local cmds: {
-    [string]: {
-        exec: (...any) -> (),
-        desc: string
-    }
+    [string]: string
 } = {
-    create = require("@cmds/create"),
-    help = require("@cmds/help"),
-    setup = require("@cmds/setup"),
-    start = require("@cmds/start")
+    create = "@cmds/create",
+    help = "@cmds/help",
+    setup = "@cmds/setup",
+    start = "@cmds/start"
 }
 
 local subcmd: string?
@@ -27,12 +23,12 @@ local function main()
 
 		if index == 2 then
 			if token == "--version" or token == "-v" then
-				version.exec()
+				require("@cmds/version").exec()
 				return
             end
             
             if token == "--help" or token == "-h" then
-                cmds.help.exec(cmds, args)
+                require("@cmds/help").exec(cmds)
                 return
 			end
 
@@ -66,17 +62,19 @@ local function main()
 	end
 
 	if not subcmd then
-		cmds.help.exec(cmds)
+		require("@cmds/help").exec(cmds)
 		return
 	end
 
-	local cmd = cmds[subcmd] or nil
-
-	if not cmd then
+    if not cmds[subcmd] then
         style.err(`Command "{subcmd}" does not exist`)
         return
-    elseif subcmd == "help" then
-		cmds.help.exec(cmds, args)
+    end
+
+	local cmd = require(cmds[subcmd]) :: { desc: string, exec: (...any) -> () }
+
+    if subcmd == "help" then
+		require("@cmds/help").exec(cmds)
 		return
 	end
 
