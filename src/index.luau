@@ -6,7 +6,6 @@ local cmds: {
 } = {
     create = "@cmds/create",
     help = "@cmds/help",
-    setup = "@cmds/setup",
     start = "@cmds/start"
 }
 

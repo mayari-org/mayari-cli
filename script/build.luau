@@ -41,5 +41,5 @@ local result = process.run("zune", {
 })
 
 if not result.ok then
-    io.stderr:write(result.stderr :: string)
+    io.stderr:write(result.stderr and result.stderr or "")
 end

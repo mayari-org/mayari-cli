@@ -7,7 +7,7 @@ local fs = zune.fs
 local toml = zune.serde.toml
 
 local entryDirPath = "./src"
-local outDir = "./dist"
+local outDir = "./.mayari"
 
 local function exec()
     local tomlContent = fs.readFileSync(`{process.cwd()}/mayari.toml`)

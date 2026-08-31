@@ -16,10 +16,10 @@ local mainLpm = `./lpm.toml`
 
 local function updateAll(newVer: string)
     for _, lpmPath in lpms do
-        tomlPatch(lpmPath, { "tools", "mayari" }, `mayari-org/mayari-cli@{newVer}`)
+        tomlPatch.setToFile(lpmPath, { "tools", "mayari" }, `mayari-org/mayari-cli@{newVer}`)
     end
 
-    tomlPatch(mainLpm, { "package", "version" }, newVer)
+    tomlPatch.setToFile(mainLpm, { "package", "version" }, newVer)
 end
 
 updateAll(process.args[2])
