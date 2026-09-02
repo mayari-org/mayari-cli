@@ -31,7 +31,6 @@ local function collectLuauFiles(dirPath: string, excludeDirs: { string }?): { st
                 walk(fullPath)
             elseif entry.kind == "file"
                 and fullPath:match("%.luau$")
-                and not fullPath:match("%.resolved%.luau$")
             then
                 table.insert(results, fullPath)
             end

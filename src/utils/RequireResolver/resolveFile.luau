@@ -157,11 +157,7 @@ local REQUIRE_PATTERN = 'require%(%s*"([^"]+)"%s*%)'
 -- and to compute the correct ./ or ../ depth. Nothing is hardcoded.
 local function resolveRequire(source: string, filePath: string): string?
     local requirerDir = fs.path.dirname(filePath) or "."
-    local packagesPath = findPackagesDir(requirerDir)
-
-    if not packagesPath then
-        return nil
-    end
+    local packagesPath = nil -- resolved lazily, only if actually needed
 
     local mask = buildSkipMask(source)
     local resolvedCount = 0
@@ -182,7 +178,20 @@ local function resolveRequire(source: string, filePath: string): string?
         if mask[matchStart] or not needsResolution(requirePath) then
             out[#out + 1] = source:sub(matchStart, matchEnd)
         else
-            local targetPath = resolvePackage(packagesPath, requirePath)
+            -- Only now, on first bare-name require, do we actually need
+            -- packages/luau to exist.
+            if not packagesPath then
+                packagesPath = findPackagesDir(requirerDir)
+
+                if not packagesPath then
+                    style.err(
+                        `Cannot resolve require("{requirePath}"): no "packages/luau" directory found (searched upward from "{requirerDir}")`
+                    )
+                   return nil 
+                end
+            end
+
+            local targetPath = resolvePackage(packagesPath :: string, requirePath)
 
             if not targetPath then
                 style.err(
@@ -230,11 +239,8 @@ end
 ]]
 local function resolveFile(filePath: string, outDir: string): string?
     local source = fs.readFileSync(filePath)
-    local resolved = resolveRequire(source, filePath)
 
-    if not resolved then
-        return nil
-    end
+    local resolved = resolveRequire(source, filePath) or source
 
     if filePath:sub(1, 2) == "./" then
         filePath = filePath:sub(3)
@@ -254,7 +260,6 @@ local function resolveFile(filePath: string, outDir: string): string?
 
     fs.makeDir(`{outDir}/{directory}`, true)
     fs.createFile(`{outDir}/{outputPath}`, { truncate = false })
-    fs.copy(`./{outputPath}`, `{outDir}/{outputPath}`, true)
     fs.writeFileSync(`{outDir}/{outputPath}`, resolved)
 
     return `{outDir}/{outputPath}`

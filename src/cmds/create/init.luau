@@ -62,5 +62,5 @@ end
 
 return {
     exec = exec,  
-    desc = "Scaffold a new Mayari project in the current directory"
+    desc = "Scaffold a new Mayari project"
 }
