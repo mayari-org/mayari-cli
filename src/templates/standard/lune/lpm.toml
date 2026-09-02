@@ -2,7 +2,7 @@
 lune = "lune-org/lune@0.10.5"
 stylua = "JohnnyMorganz/StyLua@2.5.2"
 selene = "Kampfkarren/selene@0.31.0"
-mayari = "mayari-org/mayari-cli@0.0.4"
+mayari = "mayari-org/mayari-cli@0.0.5"
 
 [scripts]
 start = "mayari start"

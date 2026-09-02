@@ -10,7 +10,7 @@ environment = "luau"
 lune = "lune-org/lune@0.10.5"
 lute = "luau-lang/lute@1.0.0"
 zune = "Scythe-Technology/zune@0.5.8"
-mayari = "mayari-org/mayari-cli@0.0.4"
+mayari = "mayari-org/mayari-cli@0.0.5"
 
 [scripts]
 
