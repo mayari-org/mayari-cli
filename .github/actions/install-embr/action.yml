@@ -1,0 +1,40 @@
+name: "Install Ember"
+description: "Installs ember for the current runner's OS"
+runs:
+  using: "composite"
+  steps:
+    - name: Install Ember (Linux)
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        curl -f -L "https://github.com/ember-luau/ember/releases/download/v0.6.0/embr-linux-x86_64.zip" -o embr.zip
+        unzip -j embr.zip
+        chmod +x embr
+        sudo mv embr /usr/local/bin/embr
+        rm embr.zip
+        embr self install
+        echo "$HOME/.ember/bin" >> $GITHUB_PATH
+
+    - name: Install Ember (macOS)
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        curl -f -L "https://github.com/ember-luau/ember/releases/download/v0.6.0/embr-macos-x86_64.zip" -o embr.zip
+        unzip -j embr.zip
+        chmod +x embr
+        sudo mv embr /usr/local/bin/embr
+        rm embr.zip
+        embr self install
+        echo "$HOME/.ember/bin" >> $GITHUB_PATH
+
+    - name: Install Ember (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: |
+        Invoke-WebRequest -Uri "https://github.com/ember-luau/ember/releases/download/v0.6.0/embr-windows-x86_64.zip" -OutFile embr.zip
+        Expand-Archive -Path embr.zip -DestinationPath embr_extracted -Force
+        New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.ember\bin" | Out-Null
+        Move-Item -Force embr_extracted\embr.exe "$env:USERPROFILE\.ember\bin\embr.exe"
+        Remove-Item embr.zip, embr_extracted -Recurse -Force
+        & "$env:USERPROFILE\.ember\bin\embr.exe" self install
+        Add-Content -Path $env:GITHUB_PATH -Value "$env:USERPROFILE\.ember\bin"

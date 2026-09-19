@@ -28,14 +28,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install LPM
-        uses: ./.github/actions/install-lpm
+      - name: Install Ember
+        uses: ./.github/actions/install-embr
         
 
       - name: Build
         run: |
           sleep 5
-          lpm i && lpm build
+          embr i && embr build
 
       - name: Zip binary (Unix)
         if: runner.os != 'Windows'
