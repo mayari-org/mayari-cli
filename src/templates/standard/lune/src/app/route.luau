@@ -4,7 +4,7 @@ local response = common.response
 local Home = {}
 
 function Home.Get()
-    return response.json({ msg = 'Hello, Nova' })
+    return response.json({ msg = 'Hello, Mayari' })
 end
 
 return Home

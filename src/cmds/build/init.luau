@@ -4,15 +4,11 @@ local resolveFile = require("@utils/RequireResolver/resolveFile")
 
 local process = zune.process
 local fs = zune.fs
-local toml = zune.serde.toml
 
 local entryDirPath = "./src"
 local outDir = "./.mayari"
 
 local function exec()
-    local tomlContent = fs.readFileSync(`{process.cwd()}/mayari.toml`)
-    local mayari = toml.decode(tomlContent)
-
     if not (fs.stat(`{entryDirPath}/main.luau`).kind == "file") then
         style.warn(`Entry file named as "main.luau" is not found at {process.cwd()}/src`)
         return
@@ -22,21 +18,10 @@ local function exec()
         resolveFile(filePath, outDir)
     end
 
-    local result = process.run(mayari.runtime, { "run", `{outDir}/src/main` }, {
-        stderr = "inherit",
-        stdin = "inherit",
-        stdout = "inherit"
-    })
-
-    if not result.ok then
-        style.err(result.stderr, result.code)
-        return
-    else
-        print(result.stdout)
-    end
+    print("Mayari build complete...\n")
 end
 
 return {
     exec = exec,
-    desc = "Start the mayari backend."
+    desc = "Build the mayari project."
 }

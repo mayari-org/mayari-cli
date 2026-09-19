@@ -123,7 +123,7 @@ local function createStandard(projectPath: string, runtime: createEnum.Runtimes)
     generateTypeDefRc(runtime)
 
     style.printB("\nRun:", "green")
-    style.print("embr start\n")
+    style.print("embr build\n")
     style.printB("Or for development mode:", "green")
     style.print("embr run dev\n")
 end
@@ -148,7 +148,7 @@ local function createBare(projectPath: string, runtime: createEnum.Runtimes)
     generateTypeDefRc(runtime)
 
     style.printB("\nRun:", "green")
-    style.print("embr start\n")
+    style.print("embr build\n")
 end
 
 local function createProject(projectPath: string, projectType: createEnum.Projects, runtime: createEnum.Runtimes)

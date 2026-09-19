@@ -14,7 +14,7 @@ mayari <command> [...args]
 |---------|-------------|
 | `create` | Scaffold a new Mayari project |
 | `setup`  | Set up the Mayari packages |
-| `start`  | Start the Mayari backend |
+| `build`  | Build the Mayari project |
 | `help`   | Print available commands |
 | `--version`, `-v` | Print the current CLI version |
 

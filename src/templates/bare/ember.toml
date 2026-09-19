@@ -13,6 +13,7 @@ zune = "Scythe-Technology/zune@0.5.8"
 mayari = "mayari-org/mayari-cli@0.0.5"
 
 [scripts]
+build = "mayari build"
 
 [dependencies]
 common = { name = "mayari/common", version = "^" }
