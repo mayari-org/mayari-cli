@@ -8,7 +8,7 @@ license = "MIT"
 [target]
 environment = "luau"
 main = "src/init.luau"
-includes = ["src", "LICENSE", "README.md", "lpm.toml", "lpm.lock"]
+includes = ["src", "LICENSE", "README.md", "ember.toml", "ember.lock"]
 
 [scripts]
 build = "zune run script/build"
@@ -16,7 +16,7 @@ dev = "zune run script/dev"
 update = "zune run script/update"
 
 [tools]
-zune = "Scythe-Technology/zune@0.5.8"
+zune = "Scythe-Technology/zune@0.5.9"
 stylua = "JohnnyMorganz/StyLua@2.5.2"
 selene = "Kampfkarren/selene@0.31.0"
 

@@ -6,13 +6,13 @@ local templatePath = "./src/templates"
 local standardPath = `{templatePath}/standard`
 
 local lpms = {
-    zuneLpm = `{standardPath}/zune/lpm.toml`,
-    luneLpm = `{standardPath}/lune/lpm.toml`,
-    luteLpm = `{standardPath}/lute/lpm.toml`,
-    bareLpm = `{templatePath}/bare/lpm.toml`
+    zuneLpm = `{standardPath}/zune/ember.toml`,
+    luneLpm = `{standardPath}/lune/ember.toml`,
+    luteLpm = `{standardPath}/lute/ember.toml`,
+    bareLpm = `{templatePath}/bare/ember.toml`
 } :: { [string]: string }
 
-local mainLpm = `./lpm.toml`
+local mainLpm = `./ember.toml`
 
 local function updateAll(newVer: string)
     for _, lpmPath in lpms do

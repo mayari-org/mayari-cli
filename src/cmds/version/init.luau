@@ -2,7 +2,7 @@ local fs = zune.fs
 local toml = zune.serde.toml
 
 local function exec()
-    local contentBuffer = fs.embedFile("../../../lpm.toml")
+    local contentBuffer = fs.embedFile("../../../ember.toml")
     local lpmContent = toml.decode(contentBuffer)
 
     print(`v{lpmContent.package.version}`)

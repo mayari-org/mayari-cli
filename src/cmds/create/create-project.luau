@@ -59,7 +59,7 @@ local function generateProject(filePaths: { string }, projectPath: string, subNu
     for _, filePath in filePaths do
         local fileBufferContent = fs.embedFile(`../../{filePath}`)
         
-        if subNum == 16 and filePath == "templates/bare/lpm.toml" then
+        if subNum == 16 and filePath == "templates/bare/ember.toml" then
             local source = buffer.tostring(fileBufferContent)
             local updatedSource = tomlPatch.set(source, { "package", "name" }, projectName)
             fileBufferContent = buffer.fromstring(updatedSource)
@@ -69,7 +69,7 @@ local function generateProject(filePaths: { string }, projectPath: string, subNu
 
     finishPrompt.success("Generated a new Mayari project!\n", nil, extraLines)
 
-    local processResult = process.run("lpm", { "i" }, { 
+    local processResult = process.run("embr", { "i" }, { 
         stdin = "inherit",
         stdout = "inherit",
         stderr = "inherit"
@@ -123,9 +123,9 @@ local function createStandard(projectPath: string, runtime: createEnum.Runtimes)
     generateTypeDefRc(runtime)
 
     style.printB("\nRun:", "green")
-    style.print("lpm start\n")
+    style.print("embr start\n")
     style.printB("Or for development mode:", "green")
-    style.print("lpm run dev\n")
+    style.print("embr run dev\n")
 end
 
 local function createBare(projectPath: string, runtime: createEnum.Runtimes)
@@ -148,7 +148,7 @@ local function createBare(projectPath: string, runtime: createEnum.Runtimes)
     generateTypeDefRc(runtime)
 
     style.printB("\nRun:", "green")
-    style.print("lpm start\n")
+    style.print("embr start\n")
 end
 
 local function createProject(projectPath: string, projectType: createEnum.Projects, runtime: createEnum.Runtimes)

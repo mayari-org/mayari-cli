@@ -30,7 +30,7 @@ local result = process.run("zune", {
     "packages/**/*.luau",
     "-f",
     ".luaurc",
-    "lpm.toml",
+    "ember.toml",
     "src/templates/**/*",
     `--out=dist/{binaryName}`,
     "--release",
