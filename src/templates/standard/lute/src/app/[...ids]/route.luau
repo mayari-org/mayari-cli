@@ -1,9 +1,14 @@
 local common = require("common")
+
 local response = common.response
 
 local Home = {}
 
-function Home.Get(req: common.RequestWith<{ ids: { string } }>)
+type Params = { 
+    ids: { string } 
+}
+
+function Home.Get(req: IRequest<Params>)
     local userIds = req.params.ids
     return response.json({ userIds = userIds, msg = 'Found user IDs' })
 end

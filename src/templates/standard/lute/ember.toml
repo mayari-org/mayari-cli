@@ -2,7 +2,7 @@
 lute = "luau-lang/lute@1.0.0"
 stylua = "JohnnyMorganz/StyLua@2.5.2"
 selene = "Kampfkarren/selene@0.31.0"
-mayari = "mayari-org/mayari-cli@0.0.5"
+mayari = "mayari-org/mayari-cli@0.1.1"
 
 [scripts]
 build = "mayari build"
@@ -12,3 +12,4 @@ dev = "mayari dev"
 [dependencies]
 mayari = { name = "mayari/core", version = "^" }
 common = { name = "mayari/common", version = "^" }
+types = { name = "mayari/types", version = "^" }

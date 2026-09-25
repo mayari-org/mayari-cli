@@ -8,6 +8,7 @@
 **/.toolstarget
 **/.vs
 **/.vscode
+**/.mayari
 **/*.*proj.user
 **/*.dbmdl
 **/*.jfm
@@ -17,7 +18,7 @@
 **/compose*
 **/Dockerfile*
 **/node_modules
-**/lune_modules
+**/packages
 **/npm-debug.log
 **/obj
 **/secrets.dev.yaml

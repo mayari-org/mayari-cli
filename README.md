@@ -4,18 +4,18 @@ A CLI tool for managing and using the Mayari environment.
 
 ## Usage
 
-```
+```bash
 mayari <command> [...args]
 ```
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `create` | Scaffold a new Mayari project |
-| `setup`  | Set up the Mayari packages |
-| `build`  | Build the Mayari project |
-| `help`   | Print available commands |
+| Command           | Description                   |
+|-------------------|-------------------------------|
+| `create`          | Scaffold a new Mayari project |
+| `setup`           | Set up the Mayari packages    |
+| `build`           | Build the Mayari project      |
+| `help`            | Print available commands      |
 | `--version`, `-v` | Print the current CLI version |
 
 ## Project Types
