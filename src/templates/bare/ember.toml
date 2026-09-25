@@ -18,3 +18,4 @@ build = "mayari build"
 [dependencies]
 common = { name = "mayari/common", version = "^" }
 adpt = { name = "mayari/adpt", version = "^" }
+types = { name = "mayari/types", version = "^" }

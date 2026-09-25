@@ -4,11 +4,11 @@ local response = common.response
 
 local Home = {}
 
-type Param = { 
-    id: string 
+type ReqParam = { 
+    params: { id: string }
 }
 
-function Home.Get(req: IRequest<Param>)
+function Home.Get(req: IRequest<ReqParam>)
     local userId = req.params.id
     return response.json({ userId = userId, msg = 'Found a user ID' })
 end
