@@ -5,7 +5,7 @@ A CLI tool for managing and using the Mayari environment.
 ## Usage
 
 ```bash
-mayari <command> [...args]
+mayari-cli <command> [...args]
 ```
 
 ## Commands
@@ -15,6 +15,7 @@ mayari <command> [...args]
 | `create`          | Scaffold a new Mayari project |
 | `setup`           | Set up the Mayari packages    |
 | `build`           | Build the Mayari project      |
+| `test`            | Executes test files           |
 | `help`            | Print available commands      |
 | `--version`, `-v` | Print the current CLI version |
 

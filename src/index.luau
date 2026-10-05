@@ -6,7 +6,8 @@ local cmds: {
 } = {
     create = "@cmds/create",
     help = "@cmds/help",
-    build = "@cmds/build"
+    build = "@cmds/build",
+    test = "@cmds/test",
 }
 
 local subcmd: string?

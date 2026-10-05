@@ -4,7 +4,7 @@ local io = zune.io
 
 local platform = zune.platform
 
-local FILE_NAME = "mayari"
+local FILE_NAME = "mayari-cli"
 
 local success, _e = pcall(function()
     return fs.readFileSync(`./{FILE_NAME}`)

@@ -3,6 +3,7 @@
     "aliases": {
         "utils": "./src/utils",
         "cmds": "./src/cmds",
-        "adpt": "./packages/luau/adpt"
+        "adpt": "./packages/luau/adpt",
+        "eval": "./packages/luau/eval"
     }
 }
